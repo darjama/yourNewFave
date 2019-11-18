@@ -13,7 +13,7 @@ const Artist = new Schema ({
   name: { type: String, unique: true, index: true },
   ranking: String,
   lastFmUrl: String,
-  Thumbnail: String,
+  thumbnail: String,
   youTubeUrl: String,
   note: String,
 })

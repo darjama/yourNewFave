@@ -35,6 +35,8 @@ bower_components/
 .flooignore
 
 
-#env
-.env
-.env2
+#keys
+keys.js
+
+#Webpack Bundle
+faveBundle.js
