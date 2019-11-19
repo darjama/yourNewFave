@@ -9,7 +9,7 @@ var FmList = (props) => {
 
     <ul className="fmList">
       {props.artists.map((artist) =>
-        <li key={artist._id}>
+        <li key={artist.lastFmUrl}>
           <FmListItem artist={artist}  addFave={props.addFave}/>
         </li>
       )}

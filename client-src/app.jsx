@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import keys from  '../keys.js';
 import FmList from './fmList.js';
-// import FaveList from './FaveList.js';
+import FaveList from './faveList.js';
 // import VideoPlayer from './VideoPlayer.js';
 // import Search from './Search.js';
 // import ArtistDetails from './ArtistDetails.js'
@@ -84,7 +84,7 @@ class App extends React.Component {
     })
     .finally( () => {
       for (var i = 0; i < this.state.lastFmResults.length; i++) {
-        this.getYouTubeList(this.state.lastFmResults[i].name);
+        //this.getYouTubeList(this.state.lastFmResults[i].name);
       }
     });
   }
@@ -127,7 +127,12 @@ class App extends React.Component {
   render() {
     return(
       <div>
-      <FmList artists={this.state.lastFmResults} addFave={this.addFave}/>
+        <div>
+          <FmList artists={this.state.lastFmResults} addFave={this.addFave}/>
+        </div>
+        <div>
+          <FaveList faves={this.state.faves} />
+        </div>
       </div>
     )
   }

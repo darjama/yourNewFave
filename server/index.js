@@ -17,7 +17,7 @@ app.get('/faves', function (req, res) {
 });
 
   app.post('/faves', function (req, res) {
-    model.addFave(req.body.name, req.body.ranking, req.body.lastFmUrl, req.body.Thumbnail, req.body.youTubeUrl, function(err) {
+    model.addFave(req.body.name, req.body.ranking, req.body.lastFmUrl, req.body.thumbnail, req.body.youTubeUrl, function(err) {
       if (err) {
         console.log(err);
         res.send(err);
