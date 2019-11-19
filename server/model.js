@@ -37,18 +37,16 @@ const addFave = function(name, ranking, lastFmUrl, thumbnail, youTubeUrl, callba
 
 const deleteFave = function(id, callback) {
   ArtistModel.deleteOne({_id: id}, (err, docs) => {
-    callback(err, docs);
+    if (err) {
+      throw new Error(err);
+    } else {
+      callback(null, docs);
+    }
   })
 }
 
-const setRanking = function(_id, ranking, callback) {
-  ArtistModel.updateOne({ _id }, { ranking }, (err, docs) => {
-    callback(err, docs);
-  })
-}
-
-const addNote = function(_id, note, callback) {
-  ArtistModel.updateOne({ _id }, { note }, (err, docs) => {
+const modFave = function(_id, ranking, note, callback) {
+  ArtistModel.updateOne({ _id }, { note, ranking }, (err, docs) => {
     callback(err, docs);
   })
 }
@@ -56,5 +54,4 @@ const addNote = function(_id, note, callback) {
 module.exports.getAllFaves = getAllFaves;
 module.exports.addFave = addFave;
 module.exports.deleteFave = deleteFave;
-module.exports.setRanking = setRanking;
-module.exports.addNote = addNote;
+module.exports.modFave = modFave;

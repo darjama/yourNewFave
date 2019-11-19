@@ -12,13 +12,11 @@ var FmListItem = (props) => {
   };
   return (
     <div>
-      <input
-      name={props.artist._id}
-      type="checkbox"
-      onChange={() => props.addFave(artistObj)} />
+      <button
+      onClick={() => props.addFave(artistObj)} > add to faves</button>
       <div className="fmListItem" /*onClick={() => (props.receiveVideo(props.video))}*/>
           <img className="fmThumbnail" src={props.artist.thumbnail}/>
-          <div className="fmName">{props.artist.name}</div>
+          <span className="fmName">{props.artist.name}</span>
       </div>
     </div>
   );

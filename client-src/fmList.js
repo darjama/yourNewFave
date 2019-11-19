@@ -3,8 +3,7 @@ import FmListItem from './fmItem.js';
 
 var FmList = (props) => {
   return (
-    <form>
-      <label>
+    <div>
       Select an artist below to add them to your favorite list
 
     <ul className="fmList">
@@ -14,8 +13,7 @@ var FmList = (props) => {
         </li>
       )}
     </ul>
-    </label>
-    </form>
+    </div>
   );
 
 };

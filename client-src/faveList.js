@@ -5,13 +5,13 @@ var FaveList = (props) => {
   return (
     <div>
       Favorite List:
-    <ol className="faveList">
+    <ul className="faveList">
       {props.faves.map((fave) =>
         <li key={fave._id}>
-         <FaveListItem fave={fave} />
+         <FaveListItem fave={fave} deleteFave={props.deleteFave} modFave={props.modFave} rankNum={props.faves.indexOf(fave) + 1}/>
         </li>
       )}
-    </ol>
+    </ul>
     </div>
   );
 
