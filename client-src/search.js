@@ -25,7 +25,7 @@ class Search extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Enter the name of an artist you like
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <input type="text" value={this.state.value} style={{margin: '5px'}} onChange={this.handleChange} />
             <input type="submit" value="let's find some music" /><br/>
         </label>
 

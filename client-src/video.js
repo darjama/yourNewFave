@@ -7,7 +7,7 @@ class Video extends Component {
     };
 
   render () {
-    return <ReactPlayer url={`https://www.youtube.com/watch?v=${this.props.videoId}-U`} />
+    return <ReactPlayer url={`https://www.youtube.com/watch?v=${this.props.videoId}-U`} playing={this.props.playing}/>
   }
 }
 

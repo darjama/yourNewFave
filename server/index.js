@@ -29,7 +29,7 @@ app.get('/faves', function (req, res) {
   });
 
     app.put('/faves', function (req, res) {
-      model.modeFave(req.body.id, req.body.ranking, req.body.note, (err, data) => {
+      model.modFave(req.body.id, req.body.note, (err, data) => {
         if (err) {
           console.log(err);
           res.status(400).end();

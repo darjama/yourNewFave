@@ -45,8 +45,8 @@ const deleteFave = function(id, callback) {
   })
 }
 
-const modFave = function(_id, ranking, note, callback) {
-  ArtistModel.updateOne({ _id }, { note, ranking }, (err, docs) => {
+const modFave = function(_id, note, callback) {
+  ArtistModel.updateOne({ _id }, { note }, (err, docs) => {
     callback(err, docs);
   })
 }

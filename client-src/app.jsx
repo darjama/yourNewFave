@@ -5,9 +5,6 @@ import FmList from './fmList.js';
 import FaveList from './faveList.js';
 import Search from './search.js'
 import Video from './video.js';
-// import VideoPlayer from './VideoPlayer.js';
-// import Search from './Search.js';
-// import ArtistDetails from './ArtistDetails.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,13 +12,15 @@ class App extends React.Component {
     this.state = {
       faves: [],
       lastFmResults: [],
-      currentVideo: 'IU99c8T33Y4'
+      currentVideo: 'IU99c8T33Y4',
+      playing: false
     };
     this.getLastFmList = this.getLastFmList.bind(this);
     this.addFave = this.addFave.bind(this);
     this.deleteFave = this.deleteFave.bind(this);
     this.getFaves = this.getFaves.bind(this);
-    // this.addNote = this.addNote.bind(this);
+    this.modFave = this.modFave.bind(this);
+    this.selectVideo = this.selectVideo.bind(this);
     this.getYouTubeList = this.getYouTubeList.bind(this);
   }
 
@@ -68,7 +67,7 @@ class App extends React.Component {
     const url=`http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${lfmKey}&format=json`;
     axios.get(url)
     .then( lfmData => {
-      // console.log("lfmData", lfmData);
+      //console.log("lfmData", lfmData);
       let similarArtists = [];
       for (var i = 0; i < 3; i++) {
         var lfmArtist = lfmData.data.similarartists.artist[i];
@@ -126,9 +125,48 @@ class App extends React.Component {
 
   addFave({ name, lastFmUrl, thumbnail, youTubeUrl }){
     //console.log(...arguments);
-    const ranking = this.state.faves[this.state.faves.length -1].ranking + 'i';
+    const ranking = Number(this.state.faves[this.state.faves.length -1].ranking)*10;
     axios.post('/faves', {
       name, ranking, lastFmUrl, thumbnail, youTubeUrl
+    })
+    .then( () => {
+      this.SetState({
+        faves: []
+      })
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally( () => {
+      this.getFaves();
+    });
+  }
+
+  modFave({ id, rankNum, note, ranking }){
+    // console.log(...arguments);
+    // var newRanking;
+    // console.log(this.state.faves[rankNum - 1]);
+    // if (this.state.faves[rankNum - 1] && this.state.faves[rankNum - 1]._id === id) {
+    //   newRanking =  ranking.toString();
+    // } else {
+    //   var low;
+    //   var high;
+    //   if (rankNum - 2 < 0) {
+    //     low = 0;
+    //     high = Number(this.state.faves[0].ranking)
+    //   }
+    //   if (rankNum >= this.state.faves.length) {
+    //     low = Number(this.state.faves[this.state.faves.length - 1].ranking);
+    //     high = Number(this.state.faves[this.state.faves.length - 1].ranking) * 10;
+    //   }else {
+    //     low = Number(this.state.faves[rankNum - 2].ranking);
+    //     high = Number(this.state.faves[rankNum - 1].ranking);
+    //   }
+    //   newRanking = ((low + high)/2).toString();
+    // }
+    axios.put('/faves', {
+      id, note
     })
     .then( () => {
       this.getFaves();
@@ -142,21 +180,11 @@ class App extends React.Component {
     });
   }
 
-  modFave({ _id, rankNum, note, ranking }){
-    console.log(...arguments);
-    axios.put('/faves', {
-      _id, ranking, note
+  selectVideo(videoId){
+    this.setState({
+      currentVideo: videoId,
+      playing: true
     })
-    .then( () => {
-      this.getFaves();
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally( () => {
-      // nothing yet
-    });
   }
 
   render() {
@@ -171,19 +199,19 @@ class App extends React.Component {
                 <tr>
               <td>
                 <Search getLfm={this.getLastFmList} />
-                <Video videoId={this.state.currentVideo} />
+                <Video videoId={this.state.currentVideo} playing={this.state.playing}/>
               </td>
               </tr>
               <tr>
               <td>
-                <FmList artists={this.state.lastFmResults} addFave={this.addFave}/>
+                <FmList artists={this.state.lastFmResults} addFave={this.addFave} selectVideo={this.selectVideo}/>
               </td>
               </tr>
               </tbody>
               </table>
             </td>
             <td>
-              <FaveList faves={this.state.faves} deleteFave={this.deleteFave} />
+              <FaveList faves={this.state.faves} deleteFave={this.deleteFave} selectVideo={this.selectVideo}  modFave={this.modFave}/>
             </td>
           </tr>
         </tbody>
