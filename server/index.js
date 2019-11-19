@@ -20,9 +20,9 @@ app.get('/faves', function (req, res) {
     model.addFave(req.body.name, req.body.ranking, req.body.lastFmUrl, req.body.Thumbnail, req.body.youTubeUrl, function(err) {
       if (err) {
         console.log(err);
-        res.status(400).end();
+        res.send(err);
       }
-      res.status(200).send("data received");
+      res.send("data received");
     })
   });
 

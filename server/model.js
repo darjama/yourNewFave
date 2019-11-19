@@ -26,9 +26,9 @@ const getAllFaves = function(callback) {
   });
 }
 
-const addFave = function(name, ranking, lastFmUrl, Thumbnail, youTubeUrl, callback) {
+const addFave = function(name, ranking, lastFmUrl, thumbnail, youTubeUrl, callback) {
   const newFave = new ArtistModel({
-    name, ranking, lastFmUrl, Thumbnail, youTubeUrl
+    name, ranking, lastFmUrl, thumbnail, youTubeUrl
   });
   newFave.save((err) => {
     callback(err);
