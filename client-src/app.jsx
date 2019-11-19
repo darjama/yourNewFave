@@ -4,6 +4,7 @@ import keys from  '../keys.js';
 import FmList from './fmList.js';
 import FaveList from './faveList.js';
 import Search from './search.js'
+import Video from './video.js';
 // import VideoPlayer from './VideoPlayer.js';
 // import Search from './Search.js';
 // import ArtistDetails from './ArtistDetails.js'
@@ -14,6 +15,7 @@ class App extends React.Component {
     this.state = {
       faves: [],
       lastFmResults: [],
+      currentVideo: 'IU99c8T33Y4'
     };
     this.getLastFmList = this.getLastFmList.bind(this);
     this.addFave = this.addFave.bind(this);
@@ -24,7 +26,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getLastFmList('rick astley');
+    this.getLastFmList('BTS');
     this.getFaves();
   }
 
@@ -159,14 +161,33 @@ class App extends React.Component {
 
   render() {
     return(
-      <div>
-        <div>
-          <Search getLfm={this.getLastFmList} />
-          <FmList artists={this.state.lastFmResults} addFave={this.addFave}/>
-        </div>
-        <div>
-          <FaveList faves={this.state.faves} deleteFave={this.deleteFave} />
-        </div>
+      <div  style={{width:"100%", alignContent:"center"}}>
+      <table>
+        <tbody>
+          <tr>
+            <td style={{verticalAlign:"text-top"}}>
+            <table>
+              <tbody>
+                <tr>
+              <td>
+                <Search getLfm={this.getLastFmList} />
+                <Video videoId={this.state.currentVideo} />
+              </td>
+              </tr>
+              <tr>
+              <td>
+                <FmList artists={this.state.lastFmResults} addFave={this.addFave}/>
+              </td>
+              </tr>
+              </tbody>
+              </table>
+            </td>
+            <td>
+              <FaveList faves={this.state.faves} deleteFave={this.deleteFave} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
       </div>
     )
   }

@@ -6,7 +6,7 @@ var FmList = (props) => {
     <div>
       Select an artist below to add them to your favorite list
 
-    <ul className="fmList">
+    <ul className="fmList" style={{listStyleType: 'none'}}>
       {props.artists.map((artist) =>
         <li key={artist.lastFmUrl}>
           <FmListItem artist={artist}  addFave={props.addFave}/>

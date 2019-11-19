@@ -48,16 +48,17 @@ class FaveItem extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Rank:
-              <input type="text" value={this.state.rankNum} onChange={this.handleRankChange} /><input type="submit" value="update" /><br/>
-            </label>
+              <input type="text" style={{width:"30px"}} value={this.state.rankNum} onChange={this.handleRankChange} />
+              <input type="submit" value="update" />
+            </label><br/>
             <label>
               Note:
-              <input type="text" value={this.props.fave.note} onChange={this.handleNoteChange} />
-            </label>
-            <input type="submit" value="save" /><br/>
+              <textarea style={{height:"60px", wordWrap:"normal"}} value={this.props.fave.note} onChange={this.handleNoteChange} />
+              <input type="submit" value="save" />
+            </label><br/>
           </form>
 
-          <button onClick={()=>{this.props.deleteFave(props.fave._id)}}>delete</button>
+          <button onClick={()=>{this.props.deleteFave(this.props.fave._id)}}>delete</button>
 
       </span>
     );

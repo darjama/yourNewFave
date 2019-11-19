@@ -11,13 +11,11 @@ var FmListItem = (props) => {
     props.addFave(artistObj);
   };
   return (
-    <div>
-      <button
-      onClick={() => props.addFave(artistObj)} > add to faves</button>
-      <div className="fmListItem" /*onClick={() => (props.receiveVideo(props.video))}*/>
-          <img className="fmThumbnail" src={props.artist.thumbnail}/>
-          <span className="fmName">{props.artist.name}</span>
-      </div>
+    <div className="fmListItem">
+        <img className="fmThumbnail" src={props.artist.thumbnail}/>
+        <span className="fmName">{props.artist.name}</span><br/>
+        <button
+    onClick={() => props.addFave(artistObj)} > add to faves</button>
     </div>
   );
 };
