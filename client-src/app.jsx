@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       faves: [],
       lastFmResults: [],
-      currentVideo: 'IU99c8T33Y4',
+      currentVideo: 'x6QZn9xiuOE',
       playing: false
     };
     this.getLastFmList = this.getLastFmList.bind(this);
@@ -67,9 +67,12 @@ class App extends React.Component {
     const url=`http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${lfmKey}&format=json`;
     axios.get(url)
     .then( lfmData => {
-      //console.log("lfmData", lfmData);
+      console.log("lfmData", lfmData);
+      if (lfmData.data.similarartists.artist.length === 0 ) {
+        alert("Nothing found, sorry! Try again.");
+      } else {
       let similarArtists = [];
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < 8; i++) {
         var lfmArtist = lfmData.data.similarartists.artist[i];
           similarArtists.push({
             name: lfmArtist.name,
@@ -79,14 +82,16 @@ class App extends React.Component {
     this.setState({
       lastFmResults: similarArtists
     });
+  }
   })
     .catch(function (error) {
       // handle error
       console.log(error);
+      alert("Nothing found, sorry! Try again.");
     })
     .finally( () => {
       for (var i = 0; i < this.state.lastFmResults.length; i++) {
-        //this.getYouTubeList(this.state.lastFmResults[i].name);
+       // this.getYouTubeList(this.state.lastFmResults[i].name);
       }
     });
   }
@@ -193,6 +198,9 @@ class App extends React.Component {
       <table>
         <tbody>
           <tr>
+            <td style={{verticalAlign:"top"}}>
+              <img src="ynfLogo.gif"/>
+            </td>
             <td style={{verticalAlign:"text-top"}}>
             <table>
               <tbody>
@@ -210,7 +218,7 @@ class App extends React.Component {
               </tbody>
               </table>
             </td>
-            <td>
+            <td style={{verticalAlign:"top"}}>
               <FaveList faves={this.state.faves} deleteFave={this.deleteFave} selectVideo={this.selectVideo}  modFave={this.modFave}/>
             </td>
           </tr>

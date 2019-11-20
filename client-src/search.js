@@ -22,7 +22,7 @@ class Search extends React.Component {
   }
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} style={{textAlign: 'center'}}>
         <label>
           Enter the name of an artist you like
           <input type="text" value={this.state.value} style={{margin: '5px'}} onChange={this.handleChange} />

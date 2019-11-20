@@ -52,25 +52,33 @@ class FaveItem extends React.Component {
     }
     return (
 
-      <span className="faveListItem" /*onClick={() => (props.receiveVideo(props.video))}*/>
-          <img className="faveThumbnail" src={this.props.fave.thumbnail}/>
-          <div className="faveName">{this.props.fave.name}</div>
-          <form onSubmit={this.handleSubmit}>
+      <span className="faveListItem" style={{padding:"1pt"}}>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <img className="faveThumbnail" src={this.props.fave.thumbnail} onClick={() => {this.props.selectVideo(this.props.fave.youTubeUrl)}}/>
+                </td>
+                <td>
+                  <h6 className="faveName"><a href={this.props.fave.lastFmUrl} style={{color: "#880000"}} target={"_blank"}>{this.props.fave.name}</a></h6>
+                  <form onSubmit={this.handleSubmit}>
             {/* <label>
               Rank:
               <input type="text" style={{width:"30px"}} value={this.state.rankNum} onChange={this.handleRankChange} />
               <input type="submit" value="update" />
             </label><br/> */}
             <label>
-              Note:
-              <textarea style={{height:"60px", wordWrap:"normal"}}
-              value={this.state.note} onChange={this.handleNoteChange} />
+              <textarea style={{height:"40px", width:"190px", wordWrap:"normal", fontSize:"9pt"}}
+              value={this.state.note} onChange={this.handleNoteChange} /><br/>
               <input type="submit" value="save note" />
-            </label><br/>
+              <button onClick={()=>{this.props.deleteFave(this.props.fave._id)}}>delete fave</button>
+            </label>
           </form>
 
-          <button onClick={()=>{this.props.deleteFave(this.props.fave._id)}}>delete fave</button>
-
+                </td>
+              </tr>
+            </tbody>
+          </table>
       </span>
     );
   }
