@@ -91,7 +91,7 @@ class App extends React.Component {
     })
     .finally( () => {
       for (var i = 0; i < this.state.lastFmResults.length; i++) {
-       // this.getYouTubeList(this.state.lastFmResults[i].name);
+       this.getYouTubeList(this.state.lastFmResults[i].name);
       }
     });
   }
