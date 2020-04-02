@@ -32,7 +32,7 @@ Once the project moves into development, the press release can be used as a touc
   > By putting together a music recommendation algorithm with a video search engine, Your New Fave let's you see as well as hear.
 
 ## Quote from You ##
-  > "It's a synergy of precedent proportions," says CEO Flippy McLippy.
+  > "It's a synergy of unprecedented proportions," says CEO Flippy McLippy.
 
 ## How to Get Started ##
   > Just drop the name of your performer into the search box, and you're on your way to musical discovery.

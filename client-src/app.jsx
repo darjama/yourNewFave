@@ -30,17 +30,9 @@ class App extends React.Component {
   }
 
   getYouTubeList(artist) {
-    const ytKey = keys.YOUTUBEKEY;
-    axios.get('https://www.googleapis.com/youtube/v3/search', { params: {
-      part: 'snippet',
-      key: ytKey,
-      q: artist,
-      maxResults: 1,
-      type: 'video',
-      videoEmbeddable: 'true'
-    }})
+    axios.get('/api/youtube/' + artist)
     .then(ytData => {
-      console.log(ytData);
+      //console.log(ytData);
       const lastFmTemp = this.state.lastFmResults;
       for(var i = 0; i < lastFmTemp.length; i ++) {
         if (lastFmTemp[i].name === artist) {
@@ -55,24 +47,22 @@ class App extends React.Component {
     })
     .catch( (error) => {
       // handle error
-      console.log(error);
+      //console.log(error);
     })
     .finally( () => {
-       console.log(this.state.lastFmResults);
+       //console.log(this.state.lastFmResults);
     });
   }
 
   getLastFmList(artist, callback) {
-    const lfmKey = keys.LASTFMKEY;
-    const url=`http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${lfmKey}&format=json`;
-    axios.get(url)
+    axios.get('/api/lastfm/' + artist)
     .then( lfmData => {
-      console.log("lfmData", lfmData);
+      //console.log("lfmData", lfmData);
       if (lfmData.data.similarartists.artist.length === 0 ) {
         alert("Nothing found, sorry! Try again.");
       } else {
       let similarArtists = [];
-      for (var i = 0; i < 8; i++) {
+      for (var i = 0; i < 4; i++) {
         var lfmArtist = lfmData.data.similarartists.artist[i];
           similarArtists.push({
             name: lfmArtist.name,
@@ -86,7 +76,7 @@ class App extends React.Component {
   })
     .catch(function (error) {
       // handle error
-      console.log(error);
+      //console.log(error);
       alert("Nothing found, sorry! Try again.");
     })
     .finally( () => {

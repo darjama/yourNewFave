@@ -7,7 +7,6 @@ mongoose.connect('mongodb://localhost/favemusic', {
 })
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 const Artist = new Schema ({
   name: { type: String, unique: true, index: true },
