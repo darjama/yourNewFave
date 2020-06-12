@@ -120,7 +120,7 @@ class App extends React.Component {
 
   addFave({ name, lastFmUrl, thumbnail, youTubeUrl }){
     //console.log(...arguments);
-    const ranking = Number(this.state.faves[this.state.faves.length -1].ranking)*10;
+    const ranking = !this.state.faves.length ? 10: Number(this.state.faves[this.state.faves.length -1].ranking)*10;
     axios.post('/faves', {
       name, ranking, lastFmUrl, thumbnail, youTubeUrl
     })
